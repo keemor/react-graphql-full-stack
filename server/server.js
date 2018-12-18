@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const graphqlHttp = require('express-graphql');
+const enforce = require('express-sslify');
+const compression = require('compression');
 
+const graphqlHttp = require('express-graphql');
 const { buildSchema } = require('graphql');
 const mongoose = require('mongoose');
 
@@ -11,7 +13,12 @@ const env = process.env.NODE_ENV || 'development';
 const port = process.env.PORT || 3000;
 
 const app = express();
+//Disable http on heroku
+if (env === 'production') {
+    app.use(enforce.HTTPS({ trustProtoHeader: true }));
+}
 
+app.use(compression());
 app.use(bodyParser.json());
 app.use('/', express.static(`${__dirname}/../dist`));
 
