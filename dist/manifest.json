@@ -1,0 +1,21 @@
+{
+    "name": "Events",
+    "short_name": "Events",
+    "start_url": "/",
+    "theme_color": "#3f51b5",
+    "background_color": "#FFFFFF",
+    "display": "standalone",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "img/icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "img/icon512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
