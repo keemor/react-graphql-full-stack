@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import eventsQuery from './eventsQuery';
@@ -12,81 +14,72 @@ const createEvent = gql`
       
     }
  `;
-
-export default class AddEvent extends Component {
-    state = {
-        title: 'Event next',
-        date: '2018-07-22'
-    };
-
-    updateTitle = ({ target: { value } }) => {
-        this.setState({ title: value });
-    };
-
-    updateDate = ({ target: { value } }) => {
-        this.setState({ date: value });
-    };
-
-
-    resetFields = () => {
-        this.setState({ title: '' });
-    };
-
-    render() {
-        return (
-            <Mutation
-                mutation={createEvent}
-                refetchQueries={[
-                    {
-                        query: eventsQuery
-                    }
-                ]}
-                awaitRefetchQueries={true}
-            >
-                {(createEvent, { loading, error }) => (
-                    <form
-                        onSubmit={evt => {
-                            evt.preventDefault();
-                            createEvent({
-                                variables: {
-                                    event: {
-                                        title: this.state.title,
-                                        description: 'test22222222222222',
-                                        price: 123,
-                                        date: this.state.date
-                                    }
+// TO DO npm install yup --save
+//https://jaredpalmer.com/formik/docs/overview
+const AddEvent = () => (
+    <div>
+        <Mutation
+            mutation={createEvent}
+            refetchQueries={[
+                {
+                    query: eventsQuery
+                }
+            ]}
+            awaitRefetchQueries={true}
+        >
+            {(createEvent, { loading, error }) => (
+                <Formik
+                    initialValues={{ title: 'Event name', date: '2018-07-22' }}
+                    validate={values => {
+                        let errors = {};
+                        if (!values.title) {
+                            errors.title = 'Required';
+                        }
+                        if (!values.date) {
+                            errors.date = 'Required';
+                        }
+                        return errors;
+                    }}
+                    onSubmit={(values, { setSubmitting, resetForm }) => {
+                        createEvent({
+                            variables: {
+                                event: {
+                                    title: values.title,
+                                    description: 'test22222222222222',
+                                    price: 123,
+                                    date: values.date
                                 }
-                            });
-                            this.resetFields();
-                        }}
-                    >
-                        <label>
-                            <span>Title</span>
-                            <input
-                                type="text"
-                                value={this.state.title}
-                                onChange={this.updateTitle}
-                            />
-                        </label>
-
-                        <label>
-                            <span>Date</span>
-                            <input
-                                type="date"
-                                value={this.state.date}
-                                onChange={this.updateDate}
-                            />
-                        </label>
-
-
+                            }
+                        });
+                        resetForm({ title: '' });
+                        setSubmitting(false);
+                    }}
+                >
+                    {({ isSubmitting }) => (
                         <div>
-                            <button>Add Event</button>
+                            <Form>
+                                <div>
+                                    <label for="title">Title: </label>
+                                    <Field type="text" name="title" />
+                                    <ErrorMessage name="title" component="div" />
+                                </div>
+                                <div>
+                                    <label for="date">Date: </label>
+                                    <Field type="date" name="date" />
+                                    <ErrorMessage name="date" component="div" />
+                                </div>
+                                <div>
+                                    <button type="submit" disabled={isSubmitting}>Submit</button>
+                                </div>
+                            </Form>
+                            {loading && <p>Adding an event  - please wait...</p>}
+                            {error && <p>Error :( Please try again</p>}
                         </div>
-                        {loading && <p>Adding an event  - please wait...</p>}
-                        {error && <p>Error :( Please try again</p>}
-                    </form>
-                )}
-            </Mutation>
-        );
-    }
-}
+                    )}
+                </Formik>
+            )}
+        </Mutation>
+    </div>
+);
+
+export default AddEvent;

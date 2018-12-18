@@ -14,7 +14,6 @@ class App extends Component {
             <ApolloProvider client={client}>
                 <AddEvent />
                 <Events />
-
             </ApolloProvider>
         );
     }
