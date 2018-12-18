@@ -29,7 +29,7 @@ const AddEvent = () => (
         >
             {(createEvent, { loading, error }) => (
                 <Formik
-                    initialValues={{ title: 'Event name', date: '2018-07-22' }}
+                    initialValues={{ title: '', date: '2018-07-22' }}
                     validate={values => {
                         let errors = {};
                         if (!values.title) {
@@ -51,7 +51,7 @@ const AddEvent = () => (
                                 }
                             }
                         });
-                        resetForm({ title: '' });
+                        resetForm();
                         setSubmitting(false);
                     }}
                 >
@@ -60,7 +60,7 @@ const AddEvent = () => (
                             <Form>
                                 <div>
                                     <label for="title">Title: </label>
-                                    <Field type="text" name="title" />
+                                    <Field type="text" name="title" placeholder="Event name" />
                                     <ErrorMessage name="title" component="div" />
                                 </div>
                                 <div>

@@ -30,6 +30,7 @@ const EventsList = () => {
                             </tr>
                         </thead>
                         <tbody>
+                            {data.events.length ? '' : (<tr><td colSpan="3">Empty list</td></tr>)}
                             {data.events.map(({ _id, title, price, date }) => {
                                 return (
                                     <tr key={_id}>
