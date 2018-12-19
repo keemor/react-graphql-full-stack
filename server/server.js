@@ -57,7 +57,7 @@ app.use('/graphql', graphqlHttp({
             return Event.find().then(events => {
                 return events.map(event => {
                     return { ...event._doc, _id: event.id, date: new Date(event.date).toDateString() };
-                });
+                }).reverse();
             }).catch(err => {
                 throw err;
             });

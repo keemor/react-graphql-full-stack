@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Events from './events';
+import Source from './source';
 import AddEvent from './addEvent';
+import Events from './events';
 
 const client = new ApolloClient({
     uri: '/graphql'
 });
 
-class App extends Component {
-    render() {
-        return (
-            <ApolloProvider client={client}>
-                <AddEvent />
-                <Events />
-            </ApolloProvider>
-        );
-    }
-}
+const App = () => {
+    return (
+        <ApolloProvider client={client}>
+            <Source />
+            <AddEvent />
+            <Events />
+        </ApolloProvider>
+    );
+};
 
 export default App;
