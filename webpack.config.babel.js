@@ -19,6 +19,11 @@ export default env => {
                     }
                 }
             ]
+        },
+        optimization: {
+            splitChunks: {
+                chunks: 'all'
+            }
         }
     };
 };
