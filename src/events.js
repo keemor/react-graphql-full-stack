@@ -9,11 +9,8 @@ const EventsList = () => {
             query={eventsQuery}
         >
             {({ data, loading, error }) => {
-                console.log('data: ', data);
-
                 if (loading) return <p>Loading...</p>;
                 if (error) return <p>Something went wrong</p>;
-
                 return (
                     <table>
                         <thead>
@@ -30,7 +27,7 @@ const EventsList = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.events.length ? '' : (<tr><td colSpan="3">Empty list</td></tr>)}
+                            {data.events.length && <tr><td colSpan="3">Empty list</td></tr>}
                             {data.events.map(({ _id, title, price, date }) => {
                                 return (
                                     <tr key={_id}>
@@ -40,8 +37,7 @@ const EventsList = () => {
                                     </tr>
                                 );
                             }
-                            )}
-                        </tbody>
+                            )}</tbody>
                     </table>
                 );
             }}

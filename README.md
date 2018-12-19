@@ -12,5 +12,6 @@ Based on:
 
 ## Change log
 ### 2018
--   28.08 - Client: React, apollo-boost, react-apollo, Formik
+-   19.12 - Client: Yup validation
+-   18.12 - Client: React, apollo-boost, react-apollo, Formik
 -   17.12 - Server: Express, Graphql, mongoose

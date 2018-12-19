@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { object, string, date } from 'yup';
 
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
@@ -14,10 +15,7 @@ const createEvent = gql`
       
     }
  `;
-// TO DO npm install yup --save
-//https://jaredpalmer.com/formik/docs/overview
 
-//Split to vendor-bundle
 const AddEvent = () => (
     <div>
         <Mutation
@@ -31,17 +29,7 @@ const AddEvent = () => (
         >
             {(createEvent, { loading, error }) => (
                 <Formik
-                    initialValues={{ title: '', date: '2018-07-22' }}
-                    validate={values => {
-                        let errors = {};
-                        if (!values.title) {
-                            errors.title = 'Required';
-                        }
-                        if (!values.date) {
-                            errors.date = 'Required';
-                        }
-                        return errors;
-                    }}
+                    initialValues={{ title: '', date: '2018-12-12' }}
                     onSubmit={(values, { setSubmitting, resetForm }) => {
                         createEvent({
                             variables: {
@@ -56,17 +44,21 @@ const AddEvent = () => (
                         resetForm();
                         setSubmitting(false);
                     }}
+                    validationSchema={object().shape({
+                        title: string().required('Required'),
+                        date: date().required('Required')
+                    })}
                 >
                     {({ isSubmitting }) => (
                         <div>
                             <Form>
                                 <div>
-                                    <label for="title">Title: </label>
+                                    <label htmlFor="title">Title: </label>
                                     <Field type="text" name="title" placeholder="Event name" />
                                     <ErrorMessage name="title" component="div" />
                                 </div>
                                 <div>
-                                    <label for="date">Date: </label>
+                                    <label htmlFor="date">Date: </label>
                                     <Field type="date" name="date" />
                                     <ErrorMessage name="date" component="div" />
                                 </div>
