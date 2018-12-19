@@ -95,6 +95,7 @@ mongoose.connect(
     { useNewUrlParser: true }
 ).then(() => {
     app.listen(port);
+    console.info('Server running on port', port);
 }).catch(err => {
     console.log('err: ', err);
 });

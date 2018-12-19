@@ -15,3 +15,27 @@ Based on:
 -   19.12 - Client: Yup validation, bootstrap, reactstrap & reactstrap-formik
 -   18.12 - Client: React, apollo-boost, react-apollo, Formik
 -   17.12 - Server: Express, Graphql, mongoose
+
+## Run locally
+
+```sh
+git clone https://github.com/keemor/react-graphql-full-stack
+cd react-graphql-full-stack
+npm install 
+```
+
+Install local MongoDB at mongodb://127.0.0.1:27017/
+
+Run development sever
+```sh
+npm run dev
+```
+
+Server running on port 3000
+
+Run development webpack
+```sh
+npm run build:dev
+```
+
+
