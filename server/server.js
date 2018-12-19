@@ -75,7 +75,7 @@ app.use('/graphql', graphqlHttp({
                 .save()
                 .then(result => {
                     console.log('result: ', result);
-                    return { ...result._doc, _id: event.id };
+                    return { ...result._doc, _id: event.id, date: new Date(event.date).toDateString() };
 
                 }).catch(err => {
                     console.log('err: ', err);
