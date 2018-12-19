@@ -84,7 +84,7 @@ app.use('/graphql', graphqlHttp({
 
         },
     },
-    graphiql: true
+    graphiql: (env === 'development')
 }));
 
 const mongodb = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/EventsApp';
