@@ -1,6 +1,6 @@
-# React Graphql Full Stack running on Heroku
+# React GraphQL Full Stack 
 
-> React Formik Graphql Express MongoDB Full Stack on [react-graphql-keemor.herokuapp.com](https://react-graphql-keemor.herokuapp.com/)
+> React Formik GraphQL Express MongoDB Full Stack on [react-graphql-keemor.herokuapp.com](https://react-graphql-keemor.herokuapp.com/)
 
 ## Based on
 
