@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Events from './events';
 import AddEvent from './addEvent';
 

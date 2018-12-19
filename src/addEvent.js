@@ -1,10 +1,14 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Button, Col, Container, Row } from 'reactstrap';
+import { ReactstrapInput } from 'reactstrap-formik';
 import { object, string, date } from 'yup';
 
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import eventsQuery from './eventsQuery';
+
+
 
 const createEvent = gql`
     mutation createEvent($event: EventInput) {
@@ -50,25 +54,25 @@ const AddEvent = () => (
                     })}
                 >
                     {({ isSubmitting }) => (
-                        <div>
-                            <Form>
-                                <div>
-                                    <label htmlFor="title">Title: </label>
-                                    <Field type="text" name="title" placeholder="Event name" />
-                                    <ErrorMessage name="title" component="div" />
-                                </div>
-                                <div>
-                                    <label htmlFor="date">Date: </label>
-                                    <Field type="date" name="date" />
-                                    <ErrorMessage name="date" component="div" />
-                                </div>
-                                <div>
-                                    <button type="submit" disabled={isSubmitting}>Submit</button>
-                                </div>
-                            </Form>
+                        <Form>
+                            <Container style={{ paddingTop: '5px' }}>
+                                <Row>
+                                    <Col xs="12">
+                                        <Field type="text" name="title" placeholder="Event name" component={ReactstrapInput} />
+                                        <ErrorMessage name="title" component="div" />
+                                    </Col>
+                                    <Col xs="12">
+                                        <Field type="date" name="date" component={ReactstrapInput} />
+                                        <ErrorMessage name="date" component="div" />
+                                    </Col>
+                                    <Col xs="12">
+                                        <Button color="primary" type="submit" disabled={isSubmitting}>Submit</Button>
+                                    </Col>
+                                </Row>
+                            </Container>
                             {loading && <p>Adding an event  - please wait...</p>}
                             {error && <p>Error :( Please try again</p>}
-                        </div>
+                        </Form>
                     )}
                 </Formik>
             )}

@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import { resolve } from 'path';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import { getIfUtils, removeEmpty } from 'webpack-config-utils';
 
@@ -17,9 +18,16 @@ export default env => {
                     use: {
                         loader: 'babel-loader'
                     }
+                },
+                {
+                    test: /\.css$/,
+                    use: [MiniCssExtractPlugin.loader, 'css-loader']
                 }
             ]
         },
+        plugins: [
+            new MiniCssExtractPlugin()
+        ],
         optimization: {
             splitChunks: {
                 chunks: 'all'
