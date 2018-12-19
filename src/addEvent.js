@@ -16,6 +16,8 @@ const createEvent = gql`
  `;
 // TO DO npm install yup --save
 //https://jaredpalmer.com/formik/docs/overview
+
+//Split to vendor-bundle
 const AddEvent = () => (
     <div>
         <Mutation
