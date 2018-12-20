@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import { resolve } from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import LiveReloadPlugin from 'webpack-livereload-plugin';
 
 import { getIfUtils, removeEmpty } from 'webpack-config-utils';
 
@@ -25,9 +26,10 @@ export default env => {
                 }
             ]
         },
-        plugins: [
-            new MiniCssExtractPlugin()
-        ],
+        plugins: removeEmpty([
+            new MiniCssExtractPlugin(),
+            ifNotProd(new LiveReloadPlugin({ appendScriptTag: true }))
+        ]),
         optimization: {
             splitChunks: {
                 chunks: 'all'

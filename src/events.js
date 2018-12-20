@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Table, Container } from 'reactstrap';
+import Loader from 'react-loader-spinner';
 
 import { Query } from 'react-apollo';
 import eventsQuery from './eventsQuery';
@@ -11,10 +12,16 @@ const EventsList = () => {
             query={eventsQuery}
         >
             {({ data, loading, error }) => {
-                if (loading) return <p>Loading...</p>;
-                if (error) return <p>Something went wrong</p>;
+                if (loading) return (<Container style={{ textAlign: 'center' }}><Loader
+                    type="ThreeDots"
+                    color="#007bff"
+                    height="100"
+                    width="100"
+                /></Container>);
+                if (error) return <Container style={{ textAlign: 'center' }}>Something went wrong</Container>;
                 return (
                     <Container style={{ paddingTop: '5px' }}>
+
                         <Table>
                             <thead>
                                 <tr>

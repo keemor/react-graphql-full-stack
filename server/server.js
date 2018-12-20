@@ -54,7 +54,7 @@ app.use('/graphql', graphqlHttp({
     `),
     rootValue: {
         events: () => {
-            return Event.find().then(events => {
+            return Event.find().then(delayPromise()).then(events => {
                 return events.map(event => {
                     return { ...event._doc, _id: event.id, date: new Date(event.date).toDateString() };
                 }).reverse();
@@ -100,4 +100,5 @@ mongoose.connect(
     console.log('err: ', err);
 });
 
-
+const duration = (env === 'development') ? 1000 : 0;
+const delayPromise = () => (result) => new Promise(resolve => setTimeout(() => resolve(result), duration));
