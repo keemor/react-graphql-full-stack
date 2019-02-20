@@ -26,8 +26,6 @@ cd react-graphql-full-stack
 npm install
 ```
 
-Install local MongoDB at mongodb://127.0.0.1:27017/
-
 Run development sever
 
 ```sh
@@ -42,7 +40,8 @@ Run development webpack
 npm run build:dev
 ```
 
-Run local MongoDB
+Install local MongoDB
+Run local MongoDB at mongodb://127.0.0.1:27017/
 
 ```
 cd "C:\Program Files\MongoDB\Server\4.0\bin"
