@@ -44,7 +44,8 @@ app.use('/graphql', graphqlHttp({
         }
 
         type RootMutation {
-            createEvent(eventInput: EventInput): Event
+            createEvent(eventInput: EventInput): Event,
+            deleteEvent(eventInput: EventInput): Event
         }
 
         schema {
@@ -61,6 +62,17 @@ app.use('/graphql', graphqlHttp({
             }).catch(err => {
                 throw err;
             });
+        },
+        deleteEvent: (args) => {
+
+            const id = args.eventInput._id;
+            return Event.findByIdAndRemove(id).then(result => {
+                console.log('result: ', result);
+                return result;
+            }).catch(err => {
+                throw err;
+            });
+
         },
         createEvent: (args) => {
             console.log('args: ', args);

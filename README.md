@@ -1,4 +1,4 @@
-# React GraphQL Full Stack 
+# React GraphQL Full Stack
 
 > React Formik GraphQL Express MongoDB Full Stack on [react-graphql-keemor.herokuapp.com](https://react-graphql-keemor.herokuapp.com/)
 
@@ -11,22 +11,25 @@
 [Formik by Jared Palmer](https://jaredpalmer.com/formik/docs/overview)
 
 ## Change log
+
 ### 2018
--   19.12 - Client: Yup validation, bootstrap, reactstrap & reactstrap-formik
--   18.12 - Client: React, apollo-boost, react-apollo, Formik
--   17.12 - Server: Express, Graphql, mongoose
+
+- 19.12 - Client: Yup validation, bootstrap, reactstrap & reactstrap-formik
+- 18.12 - Client: React, apollo-boost, react-apollo, Formik
+- 17.12 - Server: Express, Graphql, mongoose
 
 ## Run locally
 
 ```sh
 git clone https://github.com/keemor/react-graphql-full-stack
 cd react-graphql-full-stack
-npm install 
+npm install
 ```
 
 Install local MongoDB at mongodb://127.0.0.1:27017/
 
 Run development sever
+
 ```sh
 npm run dev
 ```
@@ -34,8 +37,14 @@ npm run dev
 Server running on port 3000
 
 Run development webpack
+
 ```sh
 npm run build:dev
 ```
 
+Run local MongoDB
 
+```
+cd "C:\Program Files\MongoDB\Server\4.0\bin"
+mongod.exe --dbpath \Users\username\Workspace\mongo-data
+```

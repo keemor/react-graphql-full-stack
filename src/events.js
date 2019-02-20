@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Table, Container } from 'reactstrap';
 import Loader from 'react-loader-spinner';
+import { MdDelete } from 'react-icons/md';
 
 import { Query } from 'react-apollo';
 import eventsQuery from './eventsQuery';
@@ -25,25 +26,21 @@ const EventsList = () => {
                         <Table>
                             <thead>
                                 <tr>
-                                    <th>
-                                        Title
-                            </th>
-                                    <th>
-                                        Price
-                            </th>
-                                    <th>
-                                        Date
-                            </th>
+                                    <th>Title</th>
+                                    <th>Price</th>
+                                    <th>Date</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {!data.events.length && <tr><td colSpan="3">Empty list</td></tr>}
+                                {!data.events.length && <tr><td colSpan="4">Empty list</td></tr>}
                                 {data.events.map(({ _id, title, price, date }) => {
                                     return (
                                         <tr key={_id}>
                                             <td >{title}</td>
                                             <td >{price}</td>
                                             <td >{date}</td>
+                                            <td><MdDelete id={_id} /></td>
                                         </tr>
                                     );
                                 }
