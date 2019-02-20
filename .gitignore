@@ -1,3 +1,4 @@
 node_modules/
 dist/*.map
 rundb.bat
+this.code-workspace

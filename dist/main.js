@@ -353,7 +353,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ // const deleteEvent = gql`
+//   mutation deleteEvent($eventId: String!) {
+//     deleteEvent(eventId: $eventId) {
+//       _id
+//       price
+//       title
+//     }
+//   }
+// `;
 
 var EventsList = function EventsList() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_4__["Query"], {
