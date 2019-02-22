@@ -42,6 +42,5 @@ mongoose
     .catch(err => {
         console.log('err: ', err);
     });
-
-const duration = env === 'development' ? 1000 : 0;
-const delayPromise = () => result => new Promise(resolve => setTimeout(() => resolve(result), duration));
+// const duration = env === 'development' ? 1000 : 0;
+// const delayPromise = () => result => new Promise(resolve => setTimeout(() => resolve(result), duration));
