@@ -36,6 +36,7 @@ const EventsList = () => {
                                     <th>Title</th>
                                     <th>Price</th>
                                     <th>Date</th>
+                                    <th>Creator</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -45,12 +46,13 @@ const EventsList = () => {
                                         <td colSpan="4">Empty list</td>
                                     </tr>
                                 )}
-                                {data.events.map(({ _id, title, price, date }) => {
+                                {data.events.map(({ _id, title, price, date, creator }) => {
                                     return (
                                         <tr key={_id}>
                                             <td>{title}</td>
                                             <td>{price}</td>
                                             <td>{date}</td>
+                                            <td>{creator.email}</td>
                                             <td>
                                                 <MdDelete id={_id} />
                                             </td>
