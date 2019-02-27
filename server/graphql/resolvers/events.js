@@ -40,11 +40,13 @@ module.exports = {
         }
     },
     deleteEvent: async args => {
-        console.log('deleteEvent args: ', args);
-        const id = args.eventInput._id;
         try {
-            const result = await Event.findByIdAndRemove(id);
-            return result;
+            const event = await Event.findById(args.eventId);
+            if (!event) {
+                throw new Error('Event does not exists');
+            }
+            await Event.deleteOne({ _id: args.eventId });
+            return event;
         } catch (err) {
             throw err;
         }

@@ -35,15 +35,5 @@ module.exports = {
         } catch (err) {
             throw err;
         }
-    },
-    deleteEvent: async args => {
-        console.log('deleteEvent args: ', args);
-        const id = args.eventInput._id;
-        try {
-            const result = await Event.findByIdAndRemove(id);
-            return result;
-        } catch (err) {
-            throw err;
-        }
     }
 };
