@@ -32,6 +32,8 @@ app.use(
 
 const mongodb = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/EventsApp';
 
+//https://youtu.be/bgq7FRSPDpI?t=1517
+
 //mongoose.Promise = global.Promise;
 mongoose
     .connect(mongodb, { useNewUrlParser: true })
