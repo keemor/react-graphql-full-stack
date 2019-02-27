@@ -1,17 +1,7 @@
 const Booking = require('../../models/booking');
 const Event = require('../../models/booking');
-const { dateToString } = require('../../helpers/date');
-const { getUser, getEvent } = require('./merge');
-const transformBooking = booking => {
-    return {
-        ...booking._doc,
-        _id: booking.id,
-        user: getUser.bind(this, booking._doc.user),
-        event: getEvent.bind(this, booking._doc.event),
-        createdAt: dateToString(booking._doc.createdAt),
-        updatedAt: dateToString(booking._doc.updatedAt)
-    };
-};
+
+const { transformEvent, transformBooking } = require('./merge');
 
 //.then(delayPromise())
 module.exports = {

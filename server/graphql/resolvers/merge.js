@@ -1,5 +1,6 @@
 const Event = require('../../models/event');
 const User = require('../../models/user');
+const { dateToString } = require('../../helpers/date');
 
 const getEvents = async eventIds => {
     try {
@@ -28,6 +29,28 @@ const getUser = async userId => {
         throw err;
     }
 };
-exports.getEvents = getEvents;
-exports.getEvent = getEvent;
-exports.getUser = getUser;
+
+const transformEvent = event => {
+    return {
+        ...event._doc,
+        _id: event.id,
+        date: dateToString(event._doc.date),
+        creator: getUser.bind(this, event._doc.creator)
+    };
+};
+const transformBooking = booking => {
+    return {
+        ...booking._doc,
+        _id: booking.id,
+        user: getUser.bind(this, booking._doc.user),
+        event: getEvent.bind(this, booking._doc.event),
+        createdAt: dateToString(booking._doc.createdAt),
+        updatedAt: dateToString(booking._doc.updatedAt)
+    };
+};
+
+// exports.getEvents = getEvents;
+// exports.getEvent = getEvent;
+// exports.getUser = getUser;
+exports.transformEvent = transformEvent;
+exports.transformBooking = transformBooking;
