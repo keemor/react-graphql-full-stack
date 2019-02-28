@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 const graphqlSchema = require('./graphql/schema/index');
 const graphqlResolvers = require('./graphql/resolvers/index');
+const isAuth = require('./middleware/auth');
 
 const env = process.env.NODE_ENV || 'development';
 const port = process.env.PORT || 3000;
@@ -19,7 +20,7 @@ if (env === 'production') {
 
 app.use(compression());
 app.use(bodyParser.json());
-app.use('/', express.static(`${__dirname}/../dist`));
+app.use(isAuth);
 
 app.use(
     '/graphql',
@@ -29,6 +30,8 @@ app.use(
         graphiql: env === 'development'
     })
 );
+
+app.use('/', express.static(`${__dirname}/../dist`));
 
 const mongodb = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/EventsApp';
 

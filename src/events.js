@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Table, Container } from 'reactstrap';
 import Loader from 'react-loader-spinner';
@@ -30,6 +31,7 @@ const EventsList = () => {
                 if (error) return <Container style={{ textAlign: 'center' }}>Something went wrong</Container>;
                 return (
                     <Container style={{ paddingTop: '5px' }}>
+                        <Link to="/add_event">+ Add Event</Link>
                         <Table>
                             <thead>
                                 <tr>

@@ -32,6 +32,7 @@
     "react-dom": "^16.8.2",
     "react-icons": "^3.4.0",
     "react-loader-spinner": "^2.3.0",
+    "react-router-dom": "^4.3.1",
     "reactstrap": "^7.1.0",
     "reactstrap-formik": "^1.0.5",
     "webpack": "^4.29.5",
@@ -48,6 +49,7 @@
     "express-graphql": "^0.7.1",
     "express-sslify": "^1.2.0",
     "graphql": "^14.1.1",
+    "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.13"
   },
   "browserslist": [
