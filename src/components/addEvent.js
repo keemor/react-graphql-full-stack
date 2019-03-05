@@ -4,20 +4,9 @@ import { Button, Col, Container, Row } from 'reactstrap';
 import { ReactstrapInput } from 'reactstrap-formik';
 import { object, string, date, number } from 'yup';
 
-import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import eventsQuery from '../gql/events';
 import createEvent from '../gql/createEvent';
-
-// const createEvent = gql`
-//     mutation createEvent($event: EventInput) {
-//         createEvent(eventInput: $event) {
-//             _id
-//             price
-//             title
-//         }
-//     }
-// `;
 
 const AddEvent = () => (
     <Mutation

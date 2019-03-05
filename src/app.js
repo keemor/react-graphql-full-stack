@@ -10,7 +10,8 @@ import AddEvent from './components/addEvent';
 import MainNavigation from './components/navigation/Main';
 
 import Events from './pages/Events';
-import Auth from './pages/Auth';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 import AuthContext from './context/auth';
 import { MdLocalGasStation } from 'react-icons/md';
@@ -30,18 +31,21 @@ const client = new ApolloClient({
 class App extends Component {
     state = {
         token: localStorage.getItem('token'),
-        userId: localStorage.getItem('userId')
+        userId: localStorage.getItem('userId'),
+        email: localStorage.getItem('email')
     };
 
     login = args => {
-        this.setState({ token: args.token, userId: args.userId });
+        this.setState({ token: args.token, userId: args.userId, email: args.email });
         localStorage.setItem('token', args.token);
         localStorage.setItem('userId', args.userId);
+        localStorage.setItem('email', args.email);
     };
     logout = () => {
-        this.setState({ token: null, userId: null });
+        this.setState({ token: null, userId: null, email: null });
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
+        localStorage.removeItem('email');
     };
     render() {
         //console.log('state: ', this.state);
@@ -53,23 +57,27 @@ class App extends Component {
                             value={{
                                 token: this.state.token,
                                 userId: this.state.userId,
+                                email: this.state.email,
                                 login: this.login,
                                 logout: this.logout
                             }}
                         >
-                            <MainNavigation userId={this.state.userId} logout={this.logout} />
+                            <MainNavigation userId={this.state.userId} email={this.state.email} logout={this.logout} />
                             <main>
                                 <Switch>
-                                    {this.state.token && <Redirect from="/" to="/events" exact />}
-                                    {this.state.token && <Redirect from="/auth" to="/events" exact />}
-
-                                    {!this.state.token && <Route path="/auth" component={Auth} />}
+                                    {!this.state.token && <Route path="/login" component={Login} />}
+                                    {!this.state.token && <Route path="/signup" component={Signup} />}
 
                                     <Route path="/events" component={Events} />
                                     <Route path="/source" component={Source} />
 
                                     {this.state.token && <Route path="/add_event" component={AddEvent} />}
-                                    {!this.state.token && <Redirect to="/auth" exact />}
+
+                                    <Redirect from="/" to="/events" exact />
+
+                                    {this.state.token && <Redirect from="/login" to="/events" exact />}
+                                    {!this.state.token && <Redirect from="/signup" to="/login" exact />}
+                                    {!this.state.token && <Redirect from="/add_event" to="/login" exact />}
                                 </Switch>
                             </main>
                         </AuthContext.Provider>

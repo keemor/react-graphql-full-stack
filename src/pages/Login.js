@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
 import { ApolloConsumer } from 'react-apollo';
 import { Formik, Form, Field } from 'formik';
-import { Button, Col, Container, Row } from 'reactstrap';
+import { Button, Col, Container, Row, NavLink } from 'reactstrap';
 import { ReactstrapInput } from 'reactstrap-formik';
 import { object, string, email } from 'yup';
-
+import { Link } from 'react-router-dom';
 import AuthContext from '../context/auth';
+import loginQuery from '../gql/loginUser';
 
-import gql from 'graphql-tag';
-const loginQuery = gql`
-    query login($email: String!, $password: String!) {
-        login(email: $email, password: $password) {
-            userId
-            token
-            tokenExpiration
-        }
-    }
-`;
-
-class Auth extends Component {
+class Login extends Component {
     static contextType = AuthContext;
 
     render() {
@@ -41,7 +31,8 @@ class Auth extends Component {
                                         this.context.login(
                                             response.data.login,
                                             response.data.userId,
-                                            response.data.tokenExpiration
+                                            response.data.tokenExpiration,
+                                            response.data.email
                                         );
                                     }
                                 })
@@ -69,11 +60,12 @@ class Auth extends Component {
                                             <Field type="text" name="password" component={ReactstrapInput} />
                                         </Col>
 
-                                        <Col xs="12">
-                                            <Button color="primary" type="submit" disabled={isSubmitting}>
-                                                Login
-                                            </Button>
-                                        </Col>
+                                        <Button color="primary" type="submit" disabled={isSubmitting}>
+                                            Login
+                                        </Button>
+                                        <NavLink tag={Link} to="/signup">
+                                            Sign Up
+                                        </NavLink>
                                     </Row>
                                 </Container>
                             </Form>
@@ -85,4 +77,4 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+export default Login;

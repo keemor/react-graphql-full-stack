@@ -34,7 +34,7 @@ class mainNavigation extends React.Component {
             <Container fluid color="dark">
                 <Navbar color="dark" dark expand="md">
                     <NavbarBrand tag={Link} to="/">
-                        Easy Event {this.props.userId}
+                        Easy Event {this.props.email}
                     </NavbarBrand>
 
                     <NavbarToggler onClick={this.toggle} />
@@ -47,11 +47,18 @@ class mainNavigation extends React.Component {
                             </NavItem>
 
                             {!this.props.userId && (
-                                <NavItem>
-                                    <NavLink tag={Link} to="/auth">
-                                        Login
-                                    </NavLink>
-                                </NavItem>
+                                <React.Fragment>
+                                    <NavItem>
+                                        <NavLink tag={Link} to="/login">
+                                            Login
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} to="/signup">
+                                            Sign Up
+                                        </NavLink>
+                                    </NavItem>
+                                </React.Fragment>
                             )}
 
                             {this.props.userId && (
