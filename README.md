@@ -12,11 +12,16 @@
 
 ## Change log
 
+### 2019
+
+-   06.03 - Protected routes for adding event
+-   05.03 - User signup, login, logout using bcrypt & jsonwebtoken
+
 ### 2018
 
-- 19.12 - Client: Yup validation, bootstrap, reactstrap & reactstrap-formik
-- 18.12 - Client: React, apollo-boost, react-apollo, Formik
-- 17.12 - Server: Express, Graphql, mongoose
+-   19.12 - Client: Yup validation, bootstrap, reactstrap & reactstrap-formik
+-   18.12 - Client: React, apollo-boost, react-apollo, Formik
+-   17.12 - Server: Express, Graphql, mongoose
 
 ## Run locally
 

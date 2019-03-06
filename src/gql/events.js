@@ -8,7 +8,7 @@ export default gql`
             date
             _id
             creator {
-                email
+                name
             }
         }
     }

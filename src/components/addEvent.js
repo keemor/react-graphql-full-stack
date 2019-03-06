@@ -20,7 +20,7 @@ const AddEvent = () => (
     >
         {(createEvent, { loading, error }) => (
             <Formik
-                initialValues={{ title: '', date: '2018-12-12', price: '' }}
+                initialValues={{ title: '', date: new Date().toISOString().slice(0, 10), price: '' }}
                 onSubmit={(values, { setSubmitting, resetForm }) => {
                     createEvent({
                         variables: {
@@ -52,6 +52,7 @@ const AddEvent = () => (
                             <Row>
                                 <Col xs="12">
                                     <Field
+                                        autoFocus
                                         type="text"
                                         name="title"
                                         placeholder="Event name"

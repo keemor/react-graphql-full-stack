@@ -1,18 +1,5 @@
 import React from 'react';
-import {
-    Container,
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
-} from 'reactstrap';
+import { Container, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 class mainNavigation extends React.Component {
@@ -34,7 +21,7 @@ class mainNavigation extends React.Component {
             <Container fluid color="dark">
                 <Navbar color="dark" dark expand="md">
                     <NavbarBrand tag={Link} to="/">
-                        Easy Event {this.props.email}
+                        Easy Event {this.props.name}
                     </NavbarBrand>
 
                     <NavbarToggler onClick={this.toggle} />
@@ -55,7 +42,7 @@ class mainNavigation extends React.Component {
                                     </NavItem>
                                     <NavItem>
                                         <NavLink tag={Link} to="/signup">
-                                            Sign Up
+                                            Signup
                                         </NavLink>
                                     </NavItem>
                                 </React.Fragment>

@@ -12,12 +12,12 @@ const AddUser = () => (
     <Mutation mutation={createUser}>
         {(createUser, { loading, error }) => (
             <Formik
-                initialValues={{ email: 'xx@xx.com', password: 'test' }}
+                initialValues={{ name: '', password: '' }}
                 onSubmit={(values, { setSubmitting, resetForm }) => {
                     createUser({
                         variables: {
                             user: {
-                                email: values.email,
+                                name: values.name,
                                 password: values.password
                             }
                         }
@@ -26,7 +26,7 @@ const AddUser = () => (
                     setSubmitting(false);
                 }}
                 validationSchema={object().shape({
-                    email: string().required(),
+                    name: string().required(),
                     password: string().required()
                 })}
             >
@@ -37,14 +37,25 @@ const AddUser = () => (
                             {error && <p>Error :( Please try again</p>}
                             <Row>
                                 <Col xs="12">
-                                    <Field type="text" name="email" component={ReactstrapInput} />
+                                    <Field
+                                        autoFocus
+                                        type="text"
+                                        name="name"
+                                        placeholder="Name"
+                                        component={ReactstrapInput}
+                                    />
                                 </Col>
                                 <Col xs="12">
-                                    <Field type="text" name="password" component={ReactstrapInput} />
+                                    <Field
+                                        type="password"
+                                        name="password"
+                                        placeholder="Password"
+                                        component={ReactstrapInput}
+                                    />
                                 </Col>
 
                                 <Button color="primary" type="submit" disabled={isSubmitting}>
-                                    Sign Up
+                                    Signup
                                 </Button>
                                 <NavLink tag={Link} to="/login">
                                     Login

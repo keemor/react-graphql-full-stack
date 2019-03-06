@@ -64,7 +64,7 @@ const EventsList = () => {
                                                     <td>{title}</td>
                                                     <td>{price}</td>
                                                     <td>{date}</td>
-                                                    <td>{creator.email}</td>
+                                                    <td>{creator.name}</td>
                                                     {/* <td>
                                                         <MdDelete id={_id} />
                                                     </td> */}

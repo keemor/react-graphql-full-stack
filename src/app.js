@@ -44,20 +44,20 @@ class App extends Component {
     state = {
         token: localStorage.getItem('token'),
         userId: localStorage.getItem('userId'),
-        email: localStorage.getItem('email')
+        name: localStorage.getItem('name')
     };
 
     login = args => {
-        this.setState({ token: args.token, userId: args.userId, email: args.email });
+        this.setState({ token: args.token, userId: args.userId, name: args.name });
         localStorage.setItem('token', args.token);
         localStorage.setItem('userId', args.userId);
-        localStorage.setItem('email', args.email);
+        localStorage.setItem('name', args.name);
     };
     logout = () => {
-        this.setState({ token: null, userId: null, email: null });
+        this.setState({ token: null, userId: null, name: null });
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
-        localStorage.removeItem('email');
+        localStorage.removeItem('name');
     };
     render() {
         //console.log('state: ', this.state);
@@ -69,12 +69,12 @@ class App extends Component {
                             value={{
                                 token: this.state.token,
                                 userId: this.state.userId,
-                                email: this.state.email,
+                                name: this.state.name,
                                 login: this.login,
                                 logout: this.logout
                             }}
                         >
-                            <MainNavigation userId={this.state.userId} email={this.state.email} logout={this.logout} />
+                            <MainNavigation userId={this.state.userId} name={this.state.name} logout={this.logout} />
                             <main>
                                 <Switch>
                                     {!this.state.token && <Route path="/login" component={Login} />}
