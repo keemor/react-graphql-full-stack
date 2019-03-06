@@ -1,9 +1,9 @@
 {
     "name": "Events",
-    "short_name": "Events",
+    "short_name": "Easy Events",
     "start_url": "/",
-    "theme_color": "#3f51b5",
-    "background_color": "#FFFFFF",
+    "theme_color": "#343a40",
+    "background_color": "#343a40",
     "display": "standalone",
     "orientation": "any",
     "icons": [
