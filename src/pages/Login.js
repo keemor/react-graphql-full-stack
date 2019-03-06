@@ -10,9 +10,6 @@ import loginQuery from '../gql/loginUser';
 
 class Login extends Component {
     static contextType = AuthContext;
-    // state = {
-    //     error: null
-    // };
     render() {
         return (
             <ApolloConsumer>
@@ -30,12 +27,7 @@ class Login extends Component {
                                 })
                                 .then(response => {
                                     if (response.data.login.token) {
-                                        this.context.login(
-                                            response.data.login,
-                                            response.data.userId,
-                                            response.data.tokenExpiration,
-                                            response.data.name
-                                        );
+                                        this.context.login(response.data.login);
                                     }
                                 })
                                 .catch(err => {

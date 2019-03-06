@@ -48,6 +48,7 @@ class App extends Component {
     };
 
     login = args => {
+        // console.log('args: ', args);
         this.setState({ token: args.token, userId: args.userId, name: args.name });
         localStorage.setItem('token', args.token);
         localStorage.setItem('userId', args.userId);
@@ -88,7 +89,8 @@ class App extends Component {
                                     <Redirect from="/" to="/events" exact />
 
                                     {this.state.token && <Redirect from="/login" to="/events" exact />}
-                                    {!this.state.token && <Redirect from="/signup" to="/login" exact />}
+                                    {this.state.token && <Redirect from="/signup" to="/events" exact />}
+
                                     {!this.state.token && <Redirect from="/add_event" to="/login" exact />}
                                 </Switch>
                             </main>
