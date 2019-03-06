@@ -9,12 +9,11 @@ const graphqlSchema = require('./graphql/schema/index');
 const graphqlResolvers = require('./graphql/resolvers/index');
 const isAuth = require('./middleware/auth');
 
-const env = process.env.NODE_ENV || 'development';
-const port = process.env.PORT || 3000;
+const { ENV, PORT, MONGODB_URI } = require('./helpers/constants');
 
 const app = express();
 //Disable http on heroku
-if (env === 'production') {
+if (ENV === 'production') {
     app.use(enforce.HTTPS({ trustProtoHeader: true }));
 }
 
@@ -27,25 +26,22 @@ app.use(
     graphqlHttp({
         schema: graphqlSchema,
         rootValue: graphqlResolvers,
-        graphiql: env === 'development'
+        graphiql: ENV === 'development'
     })
 );
 
 app.use('/', express.static(`${__dirname}/../dist`));
 
-const mongodb = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/EventsApp';
-
 //https://youtu.be/bgq7FRSPDpI?t=1517
 
-//mongoose.Promise = global.Promise;
 mongoose
-    .connect(mongodb, { useNewUrlParser: true })
+    .connect(MONGODB_URI, { useNewUrlParser: true })
     .then(() => {
-        app.listen(port);
-        console.info('Server running on port', port);
+        app.listen(PORT);
+        console.info('Server running on port', PORT);
     })
     .catch(err => {
         console.log('err: ', err);
     });
-// const duration = env === 'development' ? 1000 : 0;
+// const duration = ENV === 'development' ? 1000 : 0;
 // const delayPromise = () => result => new Promise(resolve => setTimeout(() => resolve(result), duration));

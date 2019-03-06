@@ -10,7 +10,9 @@ import loginQuery from '../gql/loginUser';
 
 class Login extends Component {
     static contextType = AuthContext;
-
+    // state = {
+    //     error: null
+    // };
     render() {
         return (
             <ApolloConsumer>
@@ -37,7 +39,8 @@ class Login extends Component {
                                     }
                                 })
                                 .catch(err => {
-                                    console.error(err);
+                                    // console.log('err: ', err);
+                                    // this.setState({ error: 'Login failed!' });
                                 });
                             resetForm();
                             setSubmitting(false);

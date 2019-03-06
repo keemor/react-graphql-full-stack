@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 
+const { JWT_SECRET } = require('../../helpers/constants');
+
 module.exports = {
     createUser: async args => {
         try {
@@ -31,7 +33,7 @@ module.exports = {
             if (!isEqual) {
                 throw new Error('Password is incorrect!');
             }
-            const token = jwt.sign({ userId: user.id, email: user.email }, 'somesupersecretkey', { expiresIn: '1h' });
+            const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
 
             return { userId: user.id, token: token, tokenExpiration: 1, email: user.email };
         } catch (err) {

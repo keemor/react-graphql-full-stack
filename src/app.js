@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { render } from 'react-dom';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { UncontrolledAlert } from 'reactstrap';
 
 import Source from './components/source';
 import AddEvent from './components/addEvent';
@@ -18,6 +20,16 @@ import { MdLocalGasStation } from 'react-icons/md';
 
 const client = new ApolloClient({
     uri: '/graphql',
+    onError: ({ graphQLErrors, networkError }) => {
+        //console.log('graphQLErrors, networkError: ', graphQLErrors, networkError);
+        if (graphQLErrors.length) {
+            render(
+                <UncontrolledAlert color="danger">{graphQLErrors[0].message}</UncontrolledAlert>,
+                document.getElementById('error')
+            );
+        }
+        //if (networkError) console.log(`xxxxxxxxxx   [Network error]: ${networkError}`);
+    },
     request: async operation => {
         const token = await localStorage.getItem('token');
         operation.setContext({
