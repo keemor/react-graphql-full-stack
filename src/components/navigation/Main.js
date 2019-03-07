@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Badge, Container, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 class mainNavigation extends React.Component {
@@ -21,9 +21,11 @@ class mainNavigation extends React.Component {
             <Container fluid color="dark">
                 <Navbar color="dark" dark expand="md">
                     <NavbarBrand tag={Link} to="/">
-                        Easy Event {this.props.name}
+                        Easy Event
                     </NavbarBrand>
-
+                    <h4>
+                        <Badge color="dark">{this.props.name}</Badge>
+                    </h4>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>

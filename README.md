@@ -14,6 +14,7 @@
 
 ### 2019
 
+-   07.03 - End to End Tests added with faker, jest, jest-cli & puppeteer
 -   06.03 - Protected routes for adding event
 -   05.03 - User signup, login, logout using bcrypt & jsonwebtoken
 

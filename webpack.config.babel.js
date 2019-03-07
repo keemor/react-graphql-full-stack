@@ -11,6 +11,7 @@ export default env => {
     return {
         mode: ifProd('production', 'development'),
         devtool: ifNotProd('cheap-module-source-map'),
+        stats: 'minimal',
         module: {
             rules: [
                 {
@@ -26,10 +27,7 @@ export default env => {
                 }
             ]
         },
-        plugins: removeEmpty([
-            new MiniCssExtractPlugin(),
-            ifNotProd(new LiveReloadPlugin({ appendScriptTag: true }))
-        ]),
+        plugins: removeEmpty([new MiniCssExtractPlugin(), ifNotProd(new LiveReloadPlugin({ appendScriptTag: true }))]),
         optimization: {
             splitChunks: {
                 chunks: 'all'
