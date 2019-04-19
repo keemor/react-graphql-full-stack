@@ -49,8 +49,5 @@ const transformBooking = booking => {
     };
 };
 
-// exports.getEvents = getEvents;
-// exports.getEvent = getEvent;
-// exports.getUser = getUser;
 exports.transformEvent = transformEvent;
 exports.transformBooking = transformBooking;
