@@ -8,8 +8,7 @@
         "start": "node server/server.js",
         "dev": "nodemon server/server.js",
         "build": "webpack --env.prod",
-        "build:dev": "webpack -w --env.dev",
-        "heroku-postbuild": "echo Skip build on Heroku"
+        "build:dev": "webpack -w --env.dev"
     },
     "author": "",
     "license": "ISC",
