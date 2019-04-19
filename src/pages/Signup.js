@@ -5,8 +5,8 @@ import { ReactstrapInput } from 'reactstrap-formik';
 import { object, string, date, number } from 'yup';
 import { Link } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
-import AuthContext from '../context/auth';
-import createUser from '../gql/createUser';
+import AuthContext from '~/context/auth';
+import createUser from '~/gql/createUser';
 
 class AddUser extends Component {
     static contextType = AuthContext;

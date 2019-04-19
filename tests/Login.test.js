@@ -5,6 +5,7 @@ const person = {
     email: faker.internet.email(),
     password: faker.random.word()
 };
+
 const appUrlBase = 'http://localhost:3000';
 const routes = {
     public: {
@@ -31,6 +32,25 @@ beforeAll(async () => {
     // creates a new page in the opened browser
     page = await browser.newPage();
 });
+
+// describe('Signup', () => {
+//     test('users can login', async () => {
+//         await page.goto(routes.public.login);
+//         await page.waitForSelector('form');
+
+//         await page.click('input[name=name]');
+//         await page.type('input[name=name]', 'keemor');
+//         await page.click('input[name=password]');
+//         await page.type('input[name=password]', 'keemor');
+//         await page.click('button[type=submit]');
+//         //await page.waitForSelector('[data-testid="homepage"]');
+
+//         await page.waitForSelector('.badge-dark');
+
+//         const html = await page.$eval('.badge-dark', e => e.innerHTML);
+//         expect(html).toBe('keemor');
+//     }, 1600000);
+// });
 
 describe('Login', () => {
     test('users can login', async () => {

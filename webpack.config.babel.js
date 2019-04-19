@@ -11,7 +11,11 @@ export default env => {
     return {
         mode: ifProd('production', 'development'),
         devtool: ifNotProd('cheap-module-source-map'),
-        stats: 'minimal',
+        resolve: {
+            alias: {
+                ['~']: resolve(__dirname, 'src')
+            }
+        },
         module: {
             rules: [
                 {

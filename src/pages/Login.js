@@ -5,8 +5,8 @@ import { Button, Col, Container, Row, NavLink } from 'reactstrap';
 import { ReactstrapInput } from 'reactstrap-formik';
 import { object, string } from 'yup';
 import { Link } from 'react-router-dom';
-import AuthContext from '../context/auth';
-import loginQuery from '../gql/loginUser';
+import AuthContext from '~/context/auth';
+import loginQuery from '~/gql/loginUser';
 
 class Login extends Component {
     static contextType = AuthContext;

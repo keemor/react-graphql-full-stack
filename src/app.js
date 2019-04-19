@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider as ApolloProviderHooks } from 'react-apollo-hooks';
 import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { UncontrolledAlert } from 'reactstrap';
 
 import Source from './components/source';
-import AddEvent from './components/addEvent';
+
 import MainNavigation from './components/navigation/Main';
 
 import Events from './pages/Events';
+import AddEvent from './pages/AddEvent';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
@@ -64,39 +66,45 @@ class App extends Component {
         //console.log('state: ', this.state);
         return (
             <ApolloProvider client={client}>
-                <HashRouter>
-                    <React.Fragment>
-                        <AuthContext.Provider
-                            value={{
-                                token: this.state.token,
-                                userId: this.state.userId,
-                                name: this.state.name,
-                                login: this.login,
-                                logout: this.logout
-                            }}
-                        >
-                            <MainNavigation userId={this.state.userId} name={this.state.name} logout={this.logout} />
-                            <main>
-                                <Switch>
-                                    {!this.state.token && <Route path="/login" component={Login} />}
-                                    {!this.state.token && <Route path="/signup" component={Signup} />}
+                <ApolloProviderHooks client={client}>
+                    <HashRouter>
+                        <React.Fragment>
+                            <AuthContext.Provider
+                                value={{
+                                    token: this.state.token,
+                                    userId: this.state.userId,
+                                    name: this.state.name,
+                                    login: this.login,
+                                    logout: this.logout
+                                }}
+                            >
+                                <MainNavigation
+                                    userId={this.state.userId}
+                                    name={this.state.name}
+                                    logout={this.logout}
+                                />
+                                <main>
+                                    <Switch>
+                                        {!this.state.token && <Route path="/login" component={Login} />}
+                                        {!this.state.token && <Route path="/signup" component={Signup} />}
 
-                                    <Route path="/events" component={Events} />
-                                    <Route path="/source" component={Source} />
+                                        <Route path="/events" component={Events} />
+                                        <Route path="/source" component={Source} />
 
-                                    {this.state.token && <Route path="/add_event" component={AddEvent} />}
+                                        {this.state.token && <Route path="/add_event" component={AddEvent} />}
 
-                                    <Redirect from="/" to="/events" exact />
+                                        <Redirect from="/" to="/events" exact />
 
-                                    {this.state.token && <Redirect from="/login" to="/events" exact />}
-                                    {this.state.token && <Redirect from="/signup" to="/events" exact />}
+                                        {this.state.token && <Redirect from="/login" to="/events" exact />}
+                                        {this.state.token && <Redirect from="/signup" to="/events" exact />}
 
-                                    {!this.state.token && <Redirect from="/add_event" to="/login" exact />}
-                                </Switch>
-                            </main>
-                        </AuthContext.Provider>
-                    </React.Fragment>
-                </HashRouter>
+                                        {!this.state.token && <Redirect from="/add_event" to="/login" exact />}
+                                    </Switch>
+                                </main>
+                            </AuthContext.Provider>
+                        </React.Fragment>
+                    </HashRouter>
+                </ApolloProviderHooks>
             </ApolloProvider>
         );
     }
