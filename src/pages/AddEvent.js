@@ -6,25 +6,34 @@ import { Redirect } from 'react-router-dom';
 import { object, string, date, number } from 'yup';
 
 import { useMutation } from 'react-apollo-hooks';
-import createEventGQL from '~/gql/createEvent';
+import eventsQuery from '~/gql/events';
+import createEvent from '~/gql/createEvent';
 
 const AddEvent = () => {
-    const createEvent = useMutation(createEventGQL);
+    const createEventMut = useMutation(createEvent);
     const [toEvents, setToEvents] = useState(false);
 
     if (toEvents) {
         return <Redirect to="/events" />;
     }
 
-    let r = Math.random()
-        .toString(36)
-        .substring(2);
+    console.log('process: ', process.env.NODE_ENV);
+
+    let initTitle, initPrice;
+
+    if (process.env.NODE_ENV === 'development') {
+        initTitle = Math.random()
+            .toString(36)
+            .substring(2);
+
+        initPrice = '99';
+    }
 
     return (
         <Formik
-            initialValues={{ title: r, date: new Date().toISOString().slice(0, 10), price: '99' }}
+            initialValues={{ title: initTitle, date: new Date().toISOString().slice(0, 10), price: initPrice }}
             onSubmit={(values, { setSubmitting, resetForm }) => {
-                createEvent({
+                createEventMut({
                     variables: {
                         event: {
                             title: values.title,
@@ -32,7 +41,8 @@ const AddEvent = () => {
                             price: +values.price,
                             date: values.date
                         }
-                    }
+                    },
+                    refetchQueries: [{ query: eventsQuery }]
                 })
                     .then(response => {
                         resetForm();

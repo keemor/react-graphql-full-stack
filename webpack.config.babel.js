@@ -31,7 +31,13 @@ export default env => {
                 }
             ]
         },
-        plugins: removeEmpty([new MiniCssExtractPlugin(), ifNotProd(new LiveReloadPlugin({ appendScriptTag: true }))]),
+        plugins: removeEmpty([
+            new MiniCssExtractPlugin(),
+            ifNotProd(new LiveReloadPlugin({ appendScriptTag: true })),
+            new webpack.EnvironmentPlugin({
+                NODE_ENV: 'development'
+            })
+        ]),
         optimization: {
             splitChunks: {
                 chunks: 'all'

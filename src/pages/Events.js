@@ -3,23 +3,25 @@ import { Link } from 'react-router-dom';
 
 import { Table, Container, Row, Col, NavLink, Navbar } from 'reactstrap';
 import Loader from 'react-loader-spinner';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete, MdAdd } from 'react-icons/md';
 
-import { useQuery } from 'react-apollo-hooks';
+import { useQuery, useMutation } from 'react-apollo-hooks';
 import eventsQuery from '~/gql/events';
-
-// const deleteEvent = gql`
-//   mutation deleteEvent($eventId: String!) {
-//     deleteEvent(eventId: $eventId) {
-//       _id
-//       price
-//       title
-//     }
-//   }
-// `;
+import deleteEvent from '~/gql/deleteEvent';
 
 const EventsList = () => {
     const { data, loading, error } = useQuery(eventsQuery);
+    const deleteEventMut = useMutation(deleteEvent);
+
+    const handleDeleteEvent = eventId => {
+        deleteEventMut({
+            variables: {
+                eventId: eventId
+            },
+            refetchQueries: [{ query: eventsQuery }]
+        });
+    };
+
     if (loading)
         return (
             <Container style={{ textAlign: 'center' }}>
@@ -34,7 +36,8 @@ const EventsList = () => {
                 <Col>
                     <Navbar color="dark" dark>
                         <NavLink tag={Link} to="/add_event">
-                            + Add Event
+                            <MdAdd />
+                            Add Event
                         </NavLink>
                     </Navbar>
                 </Col>
@@ -48,7 +51,7 @@ const EventsList = () => {
                                 <th>Price</th>
                                 <th>Date</th>
                                 <th>Creator</th>
-                                {/* <th>Delete</th> */}
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,9 +67,11 @@ const EventsList = () => {
                                         <td>{price}</td>
                                         <td>{date}</td>
                                         <td>{creator.name}</td>
-                                        {/* <td>
-                                        <MdDelete id={_id} />
-                                    </td> */}
+                                        <td>
+                                            <a href="#" onClick={handleDeleteEvent.bind(null, _id)}>
+                                                <MdDelete />
+                                            </a>
+                                        </td>
                                     </tr>
                                 );
                             })}

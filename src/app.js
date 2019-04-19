@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { UncontrolledAlert } from 'reactstrap';
 
 import Source from './components/source';
-
 import MainNavigation from './components/navigation/Main';
 
 import Events from './pages/Events';
@@ -18,7 +17,6 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 
 import AuthContext from './context/auth';
-import { MdLocalGasStation } from 'react-icons/md';
 
 const client = new ApolloClient({
     uri: '/graphql',
