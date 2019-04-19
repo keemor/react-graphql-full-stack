@@ -17,8 +17,6 @@ const AddEvent = () => {
         return <Redirect to="/events" />;
     }
 
-    console.log('process: ', process.env.NODE_ENV);
-
     let initTitle, initPrice;
 
     if (process.env.NODE_ENV === 'development') {

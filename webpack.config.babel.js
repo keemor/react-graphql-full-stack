@@ -35,7 +35,7 @@ export default env => {
             new MiniCssExtractPlugin(),
             ifNotProd(new LiveReloadPlugin({ appendScriptTag: true })),
             new webpack.EnvironmentPlugin({
-                NODE_ENV: 'development'
+                NODE_ENV: ifProd('production', 'development')
             })
         ]),
         optimization: {
