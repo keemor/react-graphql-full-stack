@@ -1,6 +1,6 @@
 # React GraphQL Full Stack
 
-> React Formik GraphQL Express MongoDB Full Stack on [react-graphql-keemor.herokuapp.com](https://react-graphql-keemor.herokuapp.com/)
+> React with Hooks, Apollo Client GraphQL, Express & MongoDB Full Stack hosted on [react-graphql-keemor.herokuapp.com](https://react-graphql-keemor.herokuapp.com/)
 
 ## Based on
 
