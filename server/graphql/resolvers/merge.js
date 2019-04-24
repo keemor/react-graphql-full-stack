@@ -33,7 +33,7 @@ const getEvent = async eventId => {
 const getUser = async userId => {
     try {
         const user = await userLoader.load(userId.toString());
-        return { ...user._doc, _id: user.id, createdEvents: eventLoader.loadMany.bind(this, user._doc.createdEvents) };
+        return { ...user._doc, _id: user.id, createdEvents: () => eventLoader.loadMany(user._doc.createdEvents) };
     } catch (err) {
         throw err;
     }
