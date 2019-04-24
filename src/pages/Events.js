@@ -1,24 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Table, Container, Row, Col, NavLink, Navbar } from 'reactstrap';
+import { Table, Container, Row, Col, NavLink, Navbar, Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 import { MdDelete, MdAdd } from 'react-icons/md';
 
 import { useQuery, useMutation } from 'react-apollo-hooks';
-import eventsQuery from '~/gql/events';
+import getEvents from '~/gql/getEvents';
 import deleteEvent from '~/gql/deleteEvent';
-
+import bookEvent from '~/gql/bookEvent';
+import getBookings from '~/gql/getBookings';
 const EventsList = () => {
-    const { data, loading, error } = useQuery(eventsQuery);
+    const { data, loading, error } = useQuery(getEvents);
     const deleteEventMut = useMutation(deleteEvent);
+    const bookEventMut = useMutation(bookEvent);
 
     const handleDeleteEvent = eventId => {
         deleteEventMut({
             variables: {
                 eventId: eventId
             },
-            refetchQueries: [{ query: eventsQuery }]
+            refetchQueries: [{ query: getEvents }]
+        });
+    };
+
+    const handleBookEvent = eventId => {
+        bookEventMut({
+            variables: {
+                eventId: eventId
+            },
+            refetchQueries: [{ query: getBookings }]
         });
     };
 
@@ -51,6 +62,7 @@ const EventsList = () => {
                                 <th>Price</th>
                                 <th>Date</th>
                                 <th>Creator</th>
+                                <th>Book</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -67,6 +79,11 @@ const EventsList = () => {
                                         <td>{price}</td>
                                         <td>{date}</td>
                                         <td>{creator.name}</td>
+                                        <td>
+                                            <Button color="primary" onClick={handleBookEvent.bind(null, _id)}>
+                                                Book
+                                            </Button>
+                                        </td>
                                         <td>
                                             <a href="#" onClick={handleDeleteEvent.bind(null, _id)}>
                                                 <MdDelete />

@@ -5,7 +5,7 @@ const compression = require('compression');
 const graphqlHttp = require('express-graphql');
 const mongoose = require('mongoose');
 
-const graphqlSchema = require('./graphql/schema/index');
+const graphqlSchema = require('./graphql/schema/index.gql');
 const graphqlResolvers = require('./graphql/resolvers/index');
 const isAuth = require('./middleware/auth');
 

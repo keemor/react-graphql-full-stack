@@ -12,11 +12,18 @@ import AuthContext from '~/context/auth';
 import loginQuery from '~/gql/loginUser';
 
 const Login = () => {
+    let name, password;
+
+    if (process.env.NODE_ENV === 'development') {
+        name = 'keemor';
+        password = 'keemor';
+    }
+
     const context = useContext(AuthContext);
     return (
         <ApolloProvider client={client}>
             <Formik
-                initialValues={{ name: '', password: '' }}
+                initialValues={{ name, password }}
                 onSubmit={(values, { setSubmitting, resetForm }) => {
                     client
                         .query({

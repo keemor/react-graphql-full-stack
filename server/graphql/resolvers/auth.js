@@ -18,7 +18,7 @@ module.exports = {
             });
             const result = await user.save();
 
-            const token = jwt.sign({ userId: result.id, name: result.name }, JWT_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign({ userId: result.id, name: result.name }, JWT_SECRET, { expiresIn: '8h' });
 
             return { userId: user.id, token: token, tokenExpiration: 1, name: user.name };
         } catch (err) {

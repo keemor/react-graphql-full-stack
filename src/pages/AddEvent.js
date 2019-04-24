@@ -6,11 +6,11 @@ import { Redirect } from 'react-router-dom';
 import { object, string, date, number } from 'yup';
 
 import { useMutation } from 'react-apollo-hooks';
-import eventsQuery from '~/gql/events';
+import getEvents from '~/gql/getEvents';
 import createEvent from '~/gql/createEvent';
 
 const AddEvent = () => {
-    const createEventMut = useMutation(createEvent);
+    const createEventMut = useMutation(getEvents);
     const [toEvents, setToEvents] = useState(false);
 
     if (toEvents) {

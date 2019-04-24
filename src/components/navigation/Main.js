@@ -27,6 +27,11 @@ const mainNavigation = props => {
                                 Events
                             </NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} to="/bookings">
+                                Bookings
+                            </NavLink>
+                        </NavItem>
 
                         {!userId && (
                             <React.Fragment>

@@ -10,6 +10,7 @@ import Source from './components/source';
 import MainNavigation from './components/navigation/Main';
 
 import Events from './pages/Events';
+import Bookings from './pages/Bookings';
 import AddEvent from './pages/AddEvent';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -56,6 +57,7 @@ const App = () => {
                                 {!state.token && <Route path="/signup" component={Signup} />}
 
                                 <Route path="/events" component={Events} />
+                                <Route path="/bookings" component={Bookings} />
                                 <Route path="/source" component={Source} />
 
                                 {state.token && <Route path="/add_event" component={AddEvent} />}
