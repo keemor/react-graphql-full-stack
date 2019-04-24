@@ -46,7 +46,6 @@ module.exports = {
         if (!req.isAuth) {
             throw new Error('Unauthenticated!');
         }
-        console.log(args.eventId, req.userId);
         try {
             const event = await Event.findOne({ _id: args.eventId, creator: req.userId });
             if (!event) {

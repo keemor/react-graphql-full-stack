@@ -63,8 +63,12 @@ const EventsList = () => {
                                 <th>Price</th>
                                 <th>Date</th>
                                 <th>Creator</th>
-                                <th>Book</th>
-                                <th>Delete</th>
+                                {context.userId && (
+                                    <React.Fragment>
+                                        <th>Book</th>
+                                        <th>Delete</th>
+                                    </React.Fragment>
+                                )}
                             </tr>
                         </thead>
                         <tbody>
@@ -81,18 +85,22 @@ const EventsList = () => {
                                         <td>{price}</td>
                                         <td>{date}</td>
                                         <td>{creator.name}</td>
-                                        <td>
-                                            <Button color="primary" onClick={handleBookEvent.bind(null, _id)}>
-                                                Book
-                                            </Button>
-                                        </td>
-                                        <td>
-                                            {allowDelete && (
-                                                <a href="#" onClick={handleDeleteEvent.bind(null, _id)}>
-                                                    <MdDelete />
-                                                </a>
-                                            )}
-                                        </td>
+                                        {context.userId && (
+                                            <td>
+                                                <Button color="primary" onClick={handleBookEvent.bind(null, _id)}>
+                                                    Book
+                                                </Button>
+                                            </td>
+                                        )}
+                                        {context.userId && (
+                                            <td>
+                                                {allowDelete && (
+                                                    <a href="#" onClick={handleDeleteEvent.bind(null, _id)}>
+                                                        <MdDelete />
+                                                    </a>
+                                                )}
+                                            </td>
+                                        )}
                                     </tr>
                                 );
                             })}

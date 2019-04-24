@@ -14,6 +14,8 @@
 
 ### 2019
 
+-   24.04 - Server: dataloader added to eliminate database roundtrips
+-   23.04 - Client: My bookings page
 -   19.04 - Client: Delete event mutation
 -   18.04 - Client: Introducing react-apollo-hooks
 -   17.04 - Client: Introducing hooks

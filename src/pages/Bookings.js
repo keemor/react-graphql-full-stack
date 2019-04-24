@@ -11,6 +11,7 @@ const BookingsList = () => {
     const { data, loading, error, refetch } = useQuery(getBookings);
     const cancelBookingMut = useMutation(cancelBooking);
 
+    //TO DO: https://stackoverflow.com/questions/49906437/how-to-cancel-a-fetch-on-componentwillunmount
     useEffect(() => {
         refetch();
     }, []);
