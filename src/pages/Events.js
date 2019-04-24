@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-
 import { Table, Container, Row, Col, NavLink, Navbar, Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 import { MdDelete, MdAdd } from 'react-icons/md';
-
 import { useQuery, useMutation } from 'react-apollo-hooks';
+
+import AuthContext from '~/context/auth';
 import getEvents from '~/gql/getEvents';
 import deleteEvent from '~/gql/deleteEvent';
 import bookEvent from '~/gql/bookEvent';
-import getBookings from '~/gql/getBookings';
+
 const EventsList = () => {
     const { data, loading, error } = useQuery(getEvents);
     const deleteEventMut = useMutation(deleteEvent);
     const bookEventMut = useMutation(bookEvent);
+
+    const context = useContext(AuthContext);
 
     const handleDeleteEvent = eventId => {
         deleteEventMut({
@@ -72,6 +74,7 @@ const EventsList = () => {
                                 </tr>
                             )}
                             {data.events.map(({ _id, title, price, date, creator }) => {
+                                const allowDelete = context.userId === creator._id;
                                 return (
                                     <tr key={_id}>
                                         <td>{title}</td>
@@ -84,9 +87,11 @@ const EventsList = () => {
                                             </Button>
                                         </td>
                                         <td>
-                                            <a href="#" onClick={handleDeleteEvent.bind(null, _id)}>
-                                                <MdDelete />
-                                            </a>
+                                            {allowDelete && (
+                                                <a href="#" onClick={handleDeleteEvent.bind(null, _id)}>
+                                                    <MdDelete />
+                                                </a>
+                                            )}
                                         </td>
                                     </tr>
                                 );

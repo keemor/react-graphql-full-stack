@@ -10,7 +10,7 @@ import getEvents from '~/gql/getEvents';
 import createEvent from '~/gql/createEvent';
 
 const AddEvent = () => {
-    const createEventMut = useMutation(getEvents);
+    const createEventMut = useMutation(createEvent);
     const [toEvents, setToEvents] = useState(false);
 
     if (toEvents) {
@@ -40,7 +40,7 @@ const AddEvent = () => {
                             date: values.date
                         }
                     },
-                    refetchQueries: [{ query: eventsQuery }]
+                    refetchQueries: [{ query: getEvents }]
                 })
                     .then(response => {
                         resetForm();
