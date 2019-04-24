@@ -29,7 +29,7 @@ const mainNavigation = props => {
                         </NavItem>
                         <NavItem>
                             <NavLink tag={Link} to="/bookings">
-                                Bookings
+                                My Bookings
                             </NavLink>
                         </NavItem>
 

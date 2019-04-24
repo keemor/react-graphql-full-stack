@@ -57,10 +57,11 @@ const App = () => {
                                 {!state.token && <Route path="/signup" component={Signup} />}
 
                                 <Route path="/events" component={Events} />
-                                <Route path="/bookings" component={Bookings} />
+
                                 <Route path="/source" component={Source} />
 
                                 {state.token && <Route path="/add_event" component={AddEvent} />}
+                                {state.token && <Route path="/bookings" component={Bookings} />}
 
                                 <Redirect from="/" to="/events" exact />
 
@@ -68,6 +69,7 @@ const App = () => {
                                 {state.token && <Redirect from="/signup" to="/events" exact />}
 
                                 {!state.token && <Redirect from="/add_event" to="/login" exact />}
+                                {!state.token && <Redirect from="/bookings" to="/login" exact />}
                             </Switch>
                         </main>
                     </AuthContext.Provider>

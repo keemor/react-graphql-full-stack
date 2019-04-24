@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Table, Container, Row, Col, Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
-import { MdDelete, MdAdd } from 'react-icons/md';
 
 import { useQuery, useMutation } from 'react-apollo-hooks';
 import getBookings from '~/gql/getBookings';
 import cancelBooking from '~/gql/cancelBooking';
 
 const BookingsList = () => {
-    const { data, loading, error } = useQuery(getBookings);
+    const { data, loading, error, refetch } = useQuery(getBookings);
     const cancelBookingMut = useMutation(cancelBooking);
+
+    useEffect(() => {
+        refetch();
+    }, []);
 
     const handleCancelBooking = bookingId => {
         cancelBookingMut({
@@ -39,7 +42,6 @@ const BookingsList = () => {
                                 <th>Created</th>
                                 <th>Title</th>
                                 <th>Date</th>
-                                <th>Creator</th>
                                 <th>Cancel</th>
                             </tr>
                         </thead>
@@ -49,13 +51,12 @@ const BookingsList = () => {
                                     <td colSpan="5">Empty list</td>
                                 </tr>
                             )}
-                            {data.bookings.map(({ _id, createdAt, user, event }) => {
+                            {data.bookings.map(({ _id, createdAt, event }) => {
                                 return (
                                     <tr key={_id}>
                                         <td>{createdAt}</td>
                                         <td>{event.title}</td>
                                         <td>{event.date}</td>
-                                        <td>{user.name}</td>
                                         <td>
                                             <Button color="primary" onClick={handleCancelBooking.bind(null, _id)}>
                                                 Cancel

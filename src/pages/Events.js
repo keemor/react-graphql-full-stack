@@ -28,8 +28,7 @@ const EventsList = () => {
         bookEventMut({
             variables: {
                 eventId: eventId
-            },
-            refetchQueries: [{ query: getBookings }]
+            }
         });
     };
 
