@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import Cookies from 'js-cookie';
 import { UncontrolledAlert } from 'reactstrap';
 import ApolloClient from 'apollo-boost';
 
@@ -16,7 +17,8 @@ const client = new ApolloClient({
         //if (networkError) console.log(`xxxxxxxxxx   [Network error]: ${networkError}`);
     },
     request: async operation => {
-        const token = await localStorage.getItem('token');
+        // const token = await localStorage.getItem('token');
+        const token = await Cookies.get('token');
         operation.setContext({
             headers: {
                 authorization: token ? `Bearer ${token}` : ''

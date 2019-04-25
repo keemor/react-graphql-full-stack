@@ -18,9 +18,10 @@ module.exports = {
             });
             const result = await user.save();
 
-            const token = jwt.sign({ userId: result.id, name: result.name }, JWT_SECRET, { expiresIn: '8h' });
+            const token = jwt.sign({ userId: result.id, name: result.name }, JWT_SECRET, { expiresIn: '1h' });
 
-            return { userId: user.id, token: token, tokenExpiration: 1, name: user.name };
+            //tokenExpiration in minutes
+            return { userId: user.id, token: token, tokenExpiration: 60, name: user.name };
         } catch (err) {
             throw err;
         }
@@ -37,7 +38,8 @@ module.exports = {
             }
             const token = jwt.sign({ userId: user.id, name: user.name }, JWT_SECRET, { expiresIn: '1h' });
 
-            return { userId: user.id, token: token, tokenExpiration: 1, name: user.name };
+            //tokenExpiration in minutes
+            return { userId: user.id, token: token, tokenExpiration: 60, name: user.name };
         } catch (err) {
             throw err;
         }

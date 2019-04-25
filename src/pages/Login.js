@@ -42,8 +42,7 @@ const Login = () => {
                         })
                         .catch(err => {
                             setSubmitting(false);
-                            // console.log('err: ', err);
-                            // this.setState({ error: 'Login failed!' });
+                            console.error('err: ', err);
                         });
                 }}
                 validationSchema={object().shape({

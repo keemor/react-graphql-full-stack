@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 
 import client from './gql/client';
 import { ApolloProvider } from 'react-apollo-hooks';
@@ -19,23 +20,30 @@ import AuthContext from './context/auth';
 
 const App = () => {
     const [state, setState] = useState({
-        token: localStorage.getItem('token'),
-        userId: localStorage.getItem('userId'),
-        name: localStorage.getItem('name')
+        token: Cookies.get('token'),
+        userId: Cookies.get('userId'),
+        name: Cookies.get('name')
     });
 
     const login = args => {
-        // console.log('args: ', args);
+        const expiresIn = new Date(new Date().getTime() + args.tokenExpiration * 60 * 1000);
         setState({ token: args.token, userId: args.userId, name: args.name });
-        localStorage.setItem('token', args.token);
-        localStorage.setItem('userId', args.userId);
-        localStorage.setItem('name', args.name);
+
+        Cookies.set('token', args.token, {
+            expires: expiresIn
+        });
+        Cookies.set('userId', args.userId, {
+            expires: expiresIn
+        });
+        Cookies.set('name', args.name, {
+            expires: expiresIn
+        });
     };
     const logout = () => {
         setState({ token: null, userId: null, name: null });
-        localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('name');
+        Cookies.set('token', '');
+        Cookies.set('userId', '');
+        Cookies.set('name', '');
     };
     return (
         <ApolloProvider client={client}>
