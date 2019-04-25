@@ -30,20 +30,23 @@ const App = () => {
         setState({ token: args.token, userId: args.userId, name: args.name });
 
         Cookies.set('token', args.token, {
-            expires: expiresIn
+            expires: expiresIn,
+            secure: true
         });
         Cookies.set('userId', args.userId, {
-            expires: expiresIn
+            expires: expiresIn,
+            secure: true
         });
         Cookies.set('name', args.name, {
-            expires: expiresIn
+            expires: expiresIn,
+            secure: true
         });
     };
     const logout = () => {
         setState({ token: null, userId: null, name: null });
-        Cookies.set('token', '');
-        Cookies.set('userId', '');
-        Cookies.set('name', '');
+        Cookies.remove('token');
+        Cookies.remove('userId');
+        Cookies.remove('name');
     };
     return (
         <ApolloProvider client={client}>
