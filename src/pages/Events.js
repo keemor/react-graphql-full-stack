@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Container, Row, Col, NavLink, Navbar, Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
-import { MdDelete, MdAdd } from 'react-icons/md';
+import { MdBookmarkBorder, MdAdd } from 'react-icons/md';
 import { useQuery, useMutation } from 'react-apollo-hooks';
 
 import DeleteEvent from '~/components/deleteEvent';
@@ -90,7 +90,7 @@ const EventsList = () => {
                                         {context.userId && (
                                             <td>
                                                 <Button color="primary" onClick={handleBookEvent.bind(null, _id)}>
-                                                    Book
+                                                    <MdBookmarkBorder />
                                                 </Button>
                                             </td>
                                         )}

@@ -30,16 +30,13 @@ const App = () => {
         setState({ token: args.token, userId: args.userId, name: args.name });
 
         Cookies.set('token', args.token, {
-            expires: expiresIn,
-            secure: true
+            expires: expiresIn
         });
         Cookies.set('userId', args.userId, {
-            expires: expiresIn,
-            secure: true
+            expires: expiresIn
         });
         Cookies.set('name', args.name, {
-            expires: expiresIn,
-            secure: true
+            expires: expiresIn
         });
     };
     const logout = () => {
