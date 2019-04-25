@@ -5,7 +5,9 @@ import Loader from 'react-loader-spinner';
 import { MdDelete, MdAdd } from 'react-icons/md';
 import { useQuery, useMutation } from 'react-apollo-hooks';
 
+import DeleteEvent from '~/components/deleteEvent';
 import AuthContext from '~/context/auth';
+
 import getEvents from '~/gql/getEvents';
 import deleteEvent from '~/gql/deleteEvent';
 import bookEvent from '~/gql/bookEvent';
@@ -95,9 +97,10 @@ const EventsList = () => {
                                         {context.userId && (
                                             <td>
                                                 {allowDelete && (
-                                                    <a href="#" onClick={handleDeleteEvent.bind(null, _id)}>
-                                                        <MdDelete />
-                                                    </a>
+                                                    <DeleteEvent
+                                                        handleDeleteEvent={handleDeleteEvent.bind(null, _id)}
+                                                        title={title}
+                                                    />
                                                 )}
                                             </td>
                                         )}
