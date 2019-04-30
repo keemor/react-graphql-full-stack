@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Table, Container, Row, Col, Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 
+import { MdCancel } from 'react-icons/md';
 import { useQuery, useMutation } from 'react-apollo-hooks';
 import getBookings from '~/gql/getBookings';
 import cancelBooking from '~/gql/cancelBooking';
@@ -60,7 +61,7 @@ const BookingsList = () => {
                                         <td>{event.date}</td>
                                         <td>
                                             <Button color="primary" onClick={handleCancelBooking.bind(null, _id)}>
-                                                Cancel
+                                                <MdCancel />
                                             </Button>
                                         </td>
                                     </tr>
