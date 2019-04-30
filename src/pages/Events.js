@@ -66,10 +66,10 @@ const EventsList = () => {
                                 <th>Date</th>
                                 <th>Creator</th>
                                 {context.userId && (
-                                    <React.Fragment>
+                                    <>
                                         <th>Book</th>
                                         <th>Delete</th>
-                                    </React.Fragment>
+                                    </>
                                 )}
                             </tr>
                         </thead>
