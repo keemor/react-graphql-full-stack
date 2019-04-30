@@ -15,7 +15,7 @@ const BookingsList = () => {
     //TO DO: https://stackoverflow.com/questions/49906437/how-to-cancel-a-fetch-on-componentwillunmount
     useEffect(() => {
         refetch();
-    }, []);
+    }, [data]);
 
     const handleCancelBooking = bookingId => {
         cancelBookingMut({

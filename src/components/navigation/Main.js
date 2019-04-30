@@ -3,7 +3,7 @@ import { Badge, Container, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, Na
 import { Link } from 'react-router-dom';
 
 const mainNavigation = props => {
-    const { name, logout, userId } = props;
+    const { name, userId } = props;
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => {
@@ -52,7 +52,7 @@ const mainNavigation = props => {
                                 </NavItem>
 
                                 <NavItem>
-                                    <NavLink onClick={logout} tag={Link} to="/">
+                                    <NavLink tag={Link} to="/logout">
                                         Logout
                                     </NavLink>
                                 </NavItem>

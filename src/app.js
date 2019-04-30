@@ -15,8 +15,11 @@ import Bookings from './pages/Bookings';
 import AddEvent from './pages/AddEvent';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Logout from './pages/Logout';
 
 import AuthContext from './context/auth';
+
+//TODO: https://www.nearform.com/blog/introducing-graphql-hooks/
 
 const App = () => {
     const [state, setState] = useState({
@@ -44,6 +47,7 @@ const App = () => {
         Cookies.remove('token');
         Cookies.remove('userId');
         Cookies.remove('name');
+        client.resetStore();
     };
 
     return (
@@ -59,7 +63,7 @@ const App = () => {
                             logout: logout
                         }}
                     >
-                        <MainNavigation userId={state.userId} name={state.name} logout={logout} />
+                        <MainNavigation userId={state.userId} name={state.name} />
                         <main>
                             <Switch>
                                 {!state.token && <Route path="/login" component={Login} />}
@@ -74,9 +78,11 @@ const App = () => {
 
                                 <Redirect from="/" to="/events" exact />
 
+                                {state.token && <Route path="/logout" component={Logout} />}
                                 {state.token && <Redirect from="/login" to="/events" exact />}
                                 {state.token && <Redirect from="/signup" to="/events" exact />}
 
+                                {!state.token && <Redirect from="/logout" to="/login" exact />}
                                 {!state.token && <Redirect from="/add_event" to="/login" exact />}
                                 {!state.token && <Redirect from="/bookings" to="/login" exact />}
                             </Switch>
