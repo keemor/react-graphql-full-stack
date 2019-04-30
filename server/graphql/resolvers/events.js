@@ -48,13 +48,22 @@ module.exports = {
             throw new Error('Unauthenticated!');
         }
         try {
-            await Booking.deleteMany({ event: args.eventId });
-
             const event = await Event.findOne({ _id: args.eventId, creator: req.userId });
             if (!event) {
                 throw new Error('Event does not exists');
             }
 
+            //Delete all bookings releated to the event
+            await Booking.deleteMany({ event: args.eventId });
+
+            //Remove event from the createdEvents list
+            await User.findOneAndUpdate(
+                req.userId,
+                { $pull: { createdEvents: args.eventId } },
+                { safe: true, upsert: true }
+            );
+
+            //Remove event
             await Event.deleteOne({ _id: args.eventId });
             return event;
         } catch (err) {
