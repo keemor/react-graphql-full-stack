@@ -16,6 +16,7 @@
 
 ### 2019
 
+-   30.04 - Sever/Client: delete bookings along with event
 -   24.04 - Server: dataloader added to eliminate database roundtrips
 -   23.04 - Client: My bookings page
 -   19.04 - Client: Delete event mutation
