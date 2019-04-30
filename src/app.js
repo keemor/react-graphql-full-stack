@@ -45,10 +45,11 @@ const App = () => {
         Cookies.remove('userId');
         Cookies.remove('name');
     };
+
     return (
         <ApolloProvider client={client}>
             <HashRouter>
-                <React.Fragment>
+                <>
                     <AuthContext.Provider
                         value={{
                             token: state.token,
@@ -81,7 +82,7 @@ const App = () => {
                             </Switch>
                         </main>
                     </AuthContext.Provider>
-                </React.Fragment>
+                </>
             </HashRouter>
         </ApolloProvider>
     );

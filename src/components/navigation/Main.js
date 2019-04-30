@@ -29,7 +29,7 @@ const mainNavigation = props => {
                         </NavItem>
 
                         {!userId && (
-                            <React.Fragment>
+                            <>
                                 <NavItem>
                                     <NavLink tag={Link} to="/login">
                                         Login
@@ -40,11 +40,11 @@ const mainNavigation = props => {
                                         Signup
                                     </NavLink>
                                 </NavItem>
-                            </React.Fragment>
+                            </>
                         )}
 
                         {userId && (
-                            <React.Fragment>
+                            <>
                                 <NavItem>
                                     <NavLink tag={Link} to="/bookings">
                                         My Bookings
@@ -56,7 +56,7 @@ const mainNavigation = props => {
                                         Logout
                                     </NavLink>
                                 </NavItem>
-                            </React.Fragment>
+                            </>
                         )}
                         <NavItem>
                             <NavLink tag={Link} to="/source">
