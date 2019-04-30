@@ -1,3 +1,4 @@
+const Booking = require('../../models/booking');
 const Event = require('../../models/event');
 const User = require('../../models/user');
 
@@ -47,10 +48,13 @@ module.exports = {
             throw new Error('Unauthenticated!');
         }
         try {
+            await Booking.deleteMany({ event: args.eventId });
+
             const event = await Event.findOne({ _id: args.eventId, creator: req.userId });
             if (!event) {
                 throw new Error('Event does not exists');
             }
+
             await Event.deleteOne({ _id: args.eventId });
             return event;
         } catch (err) {

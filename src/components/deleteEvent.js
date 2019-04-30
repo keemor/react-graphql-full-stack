@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MdDelete } from 'react-icons/md';
-import { Button, Modal, ModalHeader, ModalFooter } from 'reactstrap';
+import { Alert, Button, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
 
 const DeleteEvent = props => {
     const [modal, setModal] = useState(false);
@@ -21,6 +21,9 @@ const DeleteEvent = props => {
             </Button>
             <Modal isOpen={modal} toggle={toggle} centered autoFocus>
                 <ModalHeader toggle={toggle}>Delete Event {props.title}</ModalHeader>
+                <ModalBody>
+                    <Alert color="warning">Any Bookings for this event will be also deleted!</Alert>
+                </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={action}>
                         Delete
