@@ -23,7 +23,7 @@ const mainNavigation = props => {
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink tag={Link} to="/events">
+                            <NavLink tag={Link} to="/events" onClick={toggle}>
                                 Events
                             </NavLink>
                         </NavItem>
@@ -31,12 +31,12 @@ const mainNavigation = props => {
                         {!userId && (
                             <>
                                 <NavItem>
-                                    <NavLink tag={Link} to="/login">
+                                    <NavLink tag={Link} to="/login" onClick={toggle}>
                                         Login
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} to="/signup">
+                                    <NavLink tag={Link} to="/signup" onClick={toggle}>
                                         Signup
                                     </NavLink>
                                 </NavItem>
@@ -46,20 +46,20 @@ const mainNavigation = props => {
                         {userId && (
                             <>
                                 <NavItem>
-                                    <NavLink tag={Link} to="/bookings">
+                                    <NavLink tag={Link} to="/bookings" onClick={toggle}>
                                         My Bookings
                                     </NavLink>
                                 </NavItem>
 
                                 <NavItem>
-                                    <NavLink tag={Link} to="/logout">
+                                    <NavLink tag={Link} to="/logout" onClick={toggle}>
                                         Logout
                                     </NavLink>
                                 </NavItem>
                             </>
                         )}
                         <NavItem>
-                            <NavLink tag={Link} to="/source">
+                            <NavLink tag={Link} to="/source" onClick={toggle}>
                                 Source
                             </NavLink>
                         </NavItem>
