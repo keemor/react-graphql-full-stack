@@ -69,7 +69,10 @@ const AddEvent = () => {
                     .positive()
                     .integer()
                     .required(),
-                date: date().required()
+                date: date().required(),
+                description: string()
+                    .min(10)
+                    .required()
             })}
         >
             {({ isSubmitting }) => (
