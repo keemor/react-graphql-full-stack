@@ -94,7 +94,12 @@ const AddEvent = () => {
                                 <Field type="date" name="date" component={ReactstrapInput} />
                             </Col>
                             <Col xs="12">
-                                <Field type="textarea" name="description" component={ReactstrapInput} />
+                                <Field
+                                    type="textarea"
+                                    name="description"
+                                    placeholder="Description"
+                                    component={ReactstrapInput}
+                                />
                             </Col>
                             <Col xs="12">
                                 <Button color="primary" type="submit" disabled={isSubmitting}>
