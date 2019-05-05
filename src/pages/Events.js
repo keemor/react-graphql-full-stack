@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Container, Row, Col, NavLink, Navbar, Button } from 'reactstrap';
+import { Table, Container, Row, Col, NavLink, Navbar, Button, UncontrolledCollapse } from 'reactstrap';
 import Loader from 'react-loader-spinner';
-import { MdBookmarkBorder, MdAdd } from 'react-icons/md';
+import { MdBookmarkBorder, MdAdd, MdExpandMore } from 'react-icons/md';
 import { useQuery, useMutation } from 'react-apollo-hooks';
 
 import DeleteEvent from '~/components/deleteEvent';
@@ -28,7 +28,8 @@ const EventsList = () => {
         });
     };
 
-    const handleBookEvent = eventId => {
+    const handleBookEvent = (eventId, evt) => {
+        evt.stopPropagation();
         bookEventMut({
             variables: {
                 eventId: eventId
@@ -71,6 +72,7 @@ const EventsList = () => {
                                         <th>Delete</th>
                                     </>
                                 )}
+                                <th>More</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,32 +81,46 @@ const EventsList = () => {
                                     <td colSpan="4">Empty list</td>
                                 </tr>
                             )}
-                            {data.events.map(({ _id, title, price, date, creator }) => {
+                            {data.events.map(({ _id, title, description, price, date, creator }) => {
                                 const allowDelete = context.userId === creator._id;
                                 return (
-                                    <tr key={_id}>
-                                        <td>{title}</td>
-                                        <td>{price}</td>
-                                        <td>{date}</td>
-                                        <td>{creator.name}</td>
-                                        {context.userId && (
+                                    <React.Fragment key={_id}>
+                                        <tr>
+                                            <td>{title}</td>
+                                            <td>{price}</td>
+                                            <td>{date}</td>
+                                            <td>{creator.name}</td>
+                                            {context.userId && (
+                                                <td>
+                                                    <Button color="primary" onClick={handleBookEvent.bind(null, _id)}>
+                                                        <MdBookmarkBorder />
+                                                    </Button>
+                                                </td>
+                                            )}
+                                            {context.userId && (
+                                                <td>
+                                                    {allowDelete && (
+                                                        <DeleteEvent
+                                                            handleDeleteEvent={handleDeleteEvent.bind(null, _id)}
+                                                            title={title}
+                                                        />
+                                                    )}
+                                                </td>
+                                            )}
                                             <td>
-                                                <Button color="primary" onClick={handleBookEvent.bind(null, _id)}>
-                                                    <MdBookmarkBorder />
+                                                <Button color="primary" id={`toggler-${_id}`}>
+                                                    <MdExpandMore />
                                                 </Button>
                                             </td>
-                                        )}
-                                        {context.userId && (
-                                            <td>
-                                                {allowDelete && (
-                                                    <DeleteEvent
-                                                        handleDeleteEvent={handleDeleteEvent.bind(null, _id)}
-                                                        title={title}
-                                                    />
-                                                )}
+                                        </tr>
+                                        <tr>
+                                            <td colSpan="10">
+                                                <UncontrolledCollapse toggler={`toggler-${_id}`}>
+                                                    {description}
+                                                </UncontrolledCollapse>
                                             </td>
-                                        )}
-                                    </tr>
+                                        </tr>
+                                    </React.Fragment>
                                 );
                             })}
                         </tbody>

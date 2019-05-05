@@ -17,25 +17,36 @@ const AddEvent = () => {
         return <Redirect to="/events" />;
     }
 
-    let initTitle, initPrice;
+    let initTitle, initDesc, initPrice;
 
     if (process.env.NODE_ENV === 'development') {
-        initTitle = Math.random()
-            .toString(36)
-            .substring(2);
-
+        initTitle =
+            'Title ' +
+            Math.random()
+                .toString(36)
+                .substring(2);
+        initDesc =
+            'Description ' +
+            Math.random()
+                .toString(36)
+                .substring(2);
         initPrice = '99';
     }
 
     return (
         <Formik
-            initialValues={{ title: initTitle, date: new Date().toISOString().slice(0, 10), price: initPrice }}
+            initialValues={{
+                title: initTitle,
+                description: initDesc,
+                date: new Date().toISOString().slice(0, 10),
+                price: initPrice
+            }}
             onSubmit={(values, { setSubmitting, resetForm }) => {
                 createEventMut({
                     variables: {
                         event: {
                             title: values.title,
-                            description: 'description',
+                            description: values.description,
                             price: +values.price,
                             date: values.date
                         }
@@ -81,6 +92,9 @@ const AddEvent = () => {
                             </Col>
                             <Col xs="12">
                                 <Field type="date" name="date" component={ReactstrapInput} />
+                            </Col>
+                            <Col xs="12">
+                                <Field type="textarea" name="description" component={ReactstrapInput} />
                             </Col>
                             <Col xs="12">
                                 <Button color="primary" type="submit" disabled={isSubmitting}>
