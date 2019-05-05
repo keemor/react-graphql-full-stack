@@ -8,10 +8,6 @@ const eventLoader = new DataLoader(eventIds => {
     return getEvents(eventIds);
 });
 
-const userLoader = new DataLoader(userIds => {
-    return User.find({ _id: { $in: userIds } });
-});
-
 const getEvents = async eventIds => {
     try {
         const events = await Event.find({ _id: { $in: eventIds } });
@@ -32,12 +28,17 @@ const getEvent = async eventId => {
 
 const getUser = async userId => {
     try {
+<<<<<<< HEAD
         const user = await userLoader.load(userId.toString());
         return {
             ...user._doc,
             _id: user.id,
             createdEvents: () => eventLoader.loadMany(user._doc.createdEvents.map(eventId => eventId.toString()))
         };
+=======
+        const user = await User.findById(userId);
+        return { ...user._doc, _id: user.id, createdEvents: getEvents.bind(this, user._doc.createdEvents) };
+>>>>>>> parent of 0be169a... Revert "Remove userLoader fix"
     } catch (err) {
         throw err;
     }
