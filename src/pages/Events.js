@@ -47,10 +47,10 @@ const EventsList = () => {
     if (error) return <Container style={{ textAlign: 'center' }}>Something went wrong</Container>;
 
     return (
-        <Container fluid color="dark">
+        <Container fluid>
             <Row>
                 <Col>
-                    <Navbar color="dark" dark>
+                    <Navbar>
                         <NavLink tag={Link} to="/add_event">
                             <MdAdd />
                             Add Event
@@ -60,7 +60,7 @@ const EventsList = () => {
             </Row>
             <Row>
                 <Col>
-                    <Table color="dark" dark>
+                    <Table dark>
                         <thead>
                             <tr>
                                 <th>Title</th>

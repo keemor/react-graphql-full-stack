@@ -30,10 +30,10 @@ const BookingsList = () => {
     if (error) return <Container style={{ textAlign: 'center' }}>Something went wrong</Container>;
 
     return (
-        <Container fluid color="dark">
+        <Container fluid>
             <Row>
                 <Col>
-                    <Table color="dark" dark>
+                    <Table dark>
                         <thead>
                             <tr>
                                 <th>Created</th>

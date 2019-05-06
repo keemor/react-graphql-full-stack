@@ -11,8 +11,8 @@ const mainNavigation = props => {
     };
 
     return (
-        <Container fluid color="dark">
-            <Navbar color="dark" dark expand="md">
+        <Container fluid>
+            <Navbar dark expand="md">
                 <NavbarBrand tag={Link} to="/">
                     Easy Event
                 </NavbarBrand>
