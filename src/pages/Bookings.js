@@ -9,13 +9,8 @@ import getBookings from '~/gql/getBookings';
 import cancelBooking from '~/gql/cancelBooking';
 
 const BookingsList = () => {
-    const { data, loading, error, refetch } = useQuery(getBookings);
+    const { data, loading, error } = useQuery(getBookings);
     const cancelBookingMut = useMutation(cancelBooking);
-
-    //TO DO: https://stackoverflow.com/questions/49906437/how-to-cancel-a-fetch-on-componentwillunmount
-    useEffect(() => {
-        refetch();
-    }, [data]);
 
     const handleCancelBooking = bookingId => {
         cancelBookingMut({

@@ -11,6 +11,7 @@ import AuthContext from '~/context/auth';
 import getEvents from '~/gql/getEvents';
 import deleteEvent from '~/gql/deleteEvent';
 import bookEvent from '~/gql/bookEvent';
+import getBookings from '~/gql/getBookings';
 
 const EventsList = () => {
     const { data, loading, error } = useQuery(getEvents);
@@ -29,11 +30,11 @@ const EventsList = () => {
     };
 
     const handleBookEvent = (eventId, evt) => {
-        evt.stopPropagation();
         bookEventMut({
             variables: {
                 eventId: eventId
-            }
+            },
+            refetchQueries: [{ query: getBookings }]
         });
     };
 
