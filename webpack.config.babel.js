@@ -40,12 +40,11 @@ export default env => {
             new webpack.EnvironmentPlugin({
                 NODE_ENV: ifProd('production', 'development')
             })
-        ])
-        // ,
-        // optimization: {
-        //     splitChunks: {
-        //         chunks: 'all'
-        //     }
-        // }
+        ]),
+        optimization: {
+            splitChunks: {
+                chunks: 'all'
+            }
+        }
     };
 };
