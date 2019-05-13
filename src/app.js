@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import loadable from '@loadable/component';
-
 import Cookies from 'js-cookie';
 
 import client from './gql/client';
@@ -9,16 +7,15 @@ import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const MainNavigation = loadable(() => import('./components/navigation/Main'));
+import Source from './components/source';
+import MainNavigation from './components/navigation/Main';
 
-const Events = loadable(() => import('./pages/Events'));
-const Bookings = loadable(() => import('./pages/Bookings'));
-const AddEvent = loadable(() => import('./pages/AddEvent'));
-
+import Events from './pages/Events';
+import Bookings from './pages/Bookings';
+import AddEvent from './pages/AddEvent';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Logout from './pages/Logout';
-import Source from './components/source';
 
 import AuthContext from './context/auth';
 
@@ -72,12 +69,12 @@ const App = () => {
                                 {!state.token && <Route path="/login" component={Login} />}
                                 {!state.token && <Route path="/signup" component={Signup} />}
 
-                                <Route path="/events" render={() => <Events />} />
+                                <Route path="/events" component={Events} />
 
                                 <Route path="/source" component={Source} />
 
-                                {state.token && <Route path="/add_event" render={() => <AddEvent />} />}
-                                {state.token && <Route path="/bookings" render={() => <Bookings />} />}
+                                {state.token && <Route path="/add_event" component={AddEvent} />}
+                                {state.token && <Route path="/bookings" component={Bookings} />}
 
                                 <Redirect from="/" to="/events" exact />
 
