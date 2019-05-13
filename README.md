@@ -17,7 +17,6 @@
 ### 2019
 
 -   13.05 - Client: Code spliting with [loadable](https://reacttraining.com/react-router/web/guides/code-splitting)
-
 -   30.04 - Sever/Client: delete bookings along with event
 -   24.04 - Server: dataloader added to eliminate database roundtrips
 -   23.04 - Client: My bookings page
