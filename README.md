@@ -25,9 +25,9 @@
 -   18.04 - Client: Introducing react-apollo-hooks
 -   17.04 - Client: Introducing hooks
 
-*   07.03 - End to End Tests added with faker, jest, jest-cli & puppeteer
-*   06.03 - Protected routes for adding event
-*   05.03 - User signup, login, logout using bcrypt & jsonwebtoken
+-   07.03 - End to End Tests added with faker, jest, jest-cli & puppeteer
+-   06.03 - Protected routes for adding event
+-   05.03 - User signup, login, logout using bcrypt & jsonwebtoken
 
 ### 2018
 
