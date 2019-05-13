@@ -3,6 +3,8 @@ import { resolve } from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import LiveReloadPlugin from 'webpack-livereload-plugin';
 
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 import { getIfUtils, removeEmpty } from 'webpack-config-utils';
 
 export default env => {
@@ -32,10 +34,11 @@ export default env => {
             ]
         },
         plugins: removeEmpty([
+            // new BundleAnalyzerPlugin(),
             new MiniCssExtractPlugin(),
             ifNotProd(new LiveReloadPlugin({ appendScriptTag: true })),
             new webpack.EnvironmentPlugin({
-                NODE_ENV: 'development'
+                NODE_ENV: ifProd('production', 'development')
             })
         ]),
         optimization: {
