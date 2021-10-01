@@ -35,7 +35,7 @@ app.use('/', express.static(`${__dirname}/../dist`));
 //https://youtu.be/bgq7FRSPDpI?t=1517
 
 mongoose
-    .connect(MONGODB_URI, { useNewUrlParser: true })
+    .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true  })
     .then(() => {
         app.listen(PORT);
         console.info('Server running on port', PORT);
